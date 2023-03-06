@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace StocksScraper.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class YahooController : Controller
     {
         private readonly IYahooFinanceLogic _yahooFinanceLogic;
@@ -16,11 +16,30 @@ namespace StocksScraper.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<string>> Get(string ticker)
+        [ActionName("IncomeStatement")]
+        public async Task<IEnumerable<string>> GetIncomeStatement(string ticker)
         {
-           var result = await _yahooFinanceLogic.GetYahooFinanceData(ticker);
+           var result = await _yahooFinanceLogic.GetIncomeStatement(ticker);
 
            return result;
+        }
+
+        [HttpGet]
+        [ActionName("BalanceSheet")]
+        public async Task<IEnumerable<string>> GetBalanceSheet(string ticker)
+        {
+            var result = await _yahooFinanceLogic.GetBalanceSheet(ticker);
+
+            return result;
+        }
+
+        [HttpGet]
+        [ActionName("CashFlowStatement")]
+        public async Task<IEnumerable<string>> GetCashFlowStatement(string ticker)
+        {
+            var result = await _yahooFinanceLogic.GetCashFlowStatement(ticker);
+
+            return result;
         }
     }
 }
