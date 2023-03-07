@@ -41,5 +41,15 @@ namespace StocksScraper.Controllers
 
             return result;
         }
+
+
+        [HttpGet]
+        [ActionName("AnalystEstimates")]
+        public async Task<IEnumerable<string>> GetAnalystEstimates(string ticker)
+        {
+            var result = await _yahooFinanceLogic.GetAnalystEstimates(ticker);
+
+            return result;
+        }
     }
 }
